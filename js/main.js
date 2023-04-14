@@ -80,12 +80,16 @@ function createComment(comment) {
     const div = document.createElement("div");
     const email = document.createElement("h3");
     const commentBody = document.createElement("p");
+    const span = document.createElement("span");
 
     email.innerHTML = comment.email;
     commentBody.innerHTML = comment.body;
+    
+    span.innerHTML = comment.postId;
 
     div.appendChild(email);
     div.appendChild(commentBody);
+    div.appendChild(span);
 
     comments_container.appendChild(div);
 
