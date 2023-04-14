@@ -92,6 +92,20 @@ function createComment(comment) {
 
 }
 
+async function postComment(comment) {
+    // POST , UPDATE DELETE PUT 
+    const response = await fetch(`${api}/${post_id}/comments`, {
+        method: "POST",
+        body: comment,
+        headers: {
+            "Content-type": "application/json"
+        },
+    });
+
+    const data = await response.json();
+    console.log(data);
+}
+
 if(!post_id) {
     getAllPosts();
 } else {
@@ -105,11 +119,8 @@ if(!post_id) {
             body: body_input.value
         }
 
-        console.log(comment);
-
         comment = JSON.stringify(comment);
-        console.log("json",comment);
-
-        // postComment(comment);
+        
+        postComment(comment);
     })
 }
