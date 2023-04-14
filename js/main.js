@@ -7,6 +7,10 @@ const post_page = document.getElementById('post');
 const post_container = document.getElementById('post-container');
 const comments_container = document.getElementById('comments-container');
 
+const comment_form = document.getElementById('comment-form');
+const email_input = document.getElementById('email');
+const body_input = document.getElementById('body');
+
 // get id from url
 const url = new URLSearchParams(window.location.search);
 const post_id = url.get('id');
@@ -92,4 +96,20 @@ if(!post_id) {
     getAllPosts();
 } else {
     getPost(post_id);
+
+    comment_form.addEventListener('submit', (event)=>{
+        event.preventDefault();
+
+        let comment = {
+            email: email_input.value,
+            body: body_input.value
+        }
+
+        console.log(comment);
+
+        comment = JSON.stringify(comment);
+        console.log("json",comment);
+
+        // postComment(comment);
+    })
 }
