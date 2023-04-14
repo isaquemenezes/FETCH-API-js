@@ -3,6 +3,10 @@ const api = "https://jsonplaceholder.typicode.com/posts";
 const load = document.getElementById('loading');
 const postsContainer = document.getElementById('posts-container');
 
+// get id from url
+const url = new URLSearchParams(window.location.search);
+const post_id = url.get('id');
+
 async function getAllPosts() {
     const response = await fetch(api)
 
@@ -34,4 +38,8 @@ async function getAllPosts() {
     })
 }
 
-getAllPosts();
+if(!post_id) {
+    getAllPosts();
+} else {
+    console.log(post_id);
+}
