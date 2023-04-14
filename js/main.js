@@ -56,6 +56,36 @@ async function getPost(id) {
     load.classList.add('hide');
     post_page.classList.remove('hide');
 
+    const title = document.createElement("h1");
+    const body = document.createElement("p");
+
+    title.innerText = dataPost.title;
+    body.innerHTML = dataPost.body;
+
+    post_container.appendChild(title);
+    post_container.appendChild(body);
+
+    dataComments.map((comment) => {
+        createComment(comment);
+
+    });
+   
+
+}
+
+function createComment(comment) {
+    const div = document.createElement("div");
+    const email = document.createElement("h3");
+    const commentBody = document.createElement("p");
+
+    email.innerHTML = comment.email;
+    commentBody.innerHTML = comment.body;
+
+    div.appendChild(email);
+    div.appendChild(commentBody);
+
+    comments_container.appendChild(div);
+
 }
 
 if(!post_id) {
