@@ -73,7 +73,6 @@ async function getPost(id) {
         createComment(comment);
 
     });
-   
 
 }
 
@@ -103,6 +102,7 @@ async function postComment(comment) {
     });
 
     const data = await response.json();
+    createComment(data);
     console.log(data);
 }
 
