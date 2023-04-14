@@ -1,7 +1,7 @@
 const api = "https://jsonplaceholder.typicode.com/posts";
 
 const load = document.getElementById('loading');
-const posts = document.getElementById('posts-container');
+const postsContainer = document.getElementById('posts-container');
 
 async function getAllPosts() {
     const response = await fetch(api)
@@ -11,6 +11,27 @@ async function getAllPosts() {
     const data = await response.json();
 
     console.log(data);
+
+    load.classList.add("hide");
+
+    data.map((post) => {
+        const div = document.createElement("div");
+        const title = document.createElement("h2");
+        const body = document.createElement("p");
+        const link = document.createElement("a");
+
+        title.innerHTML = post.title;
+        body.innerHTML = post.body;
+        link.innerHTML = "ler";
+        link.setAttribute("href", `/post.html?id=${post.id}`);
+
+        div.appendChild(title);
+        div.appendChild(body);
+        div.appendChild(link);
+
+        postsContainer.appendChild(div);
+
+    })
 }
 
 getAllPosts();
