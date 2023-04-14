@@ -3,9 +3,14 @@ const api = "https://jsonplaceholder.typicode.com/posts";
 const load = document.getElementById('loading');
 const postsContainer = document.getElementById('posts-container');
 
+const post_page = document.getElementById('post');
+const post_container = document.getElementById('post-container');
+const comments_container = document.getElementById('comments-container');
+
 // get id from url
 const url = new URLSearchParams(window.location.search);
 const post_id = url.get('id');
+
 
 async function getAllPosts() {
     const response = await fetch(api)
@@ -35,11 +40,26 @@ async function getAllPosts() {
 
         postsContainer.appendChild(div);
 
-    })
+    });
+}
+
+async function getPost(id) {
+    const [responsePost, responseComments] = await Promise.all([
+        fetch(`${api}/${id}`),
+        fetch(`${api}/${id}/comments`)
+    ]);
+
+    const dataPost = await responsePost.json();
+
+    const dataComments = await responseComments.json();
+
+    load.classList.add('hide');
+    post_page.classList.remove('hide');
+
 }
 
 if(!post_id) {
     getAllPosts();
 } else {
-    console.log(post_id);
+    getPost(post_id);
 }
